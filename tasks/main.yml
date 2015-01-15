@@ -44,6 +44,10 @@
   tags:
     - config
 
+- name: restart nrpe
+  action: command /etc/init.d/nrpe restart
+  when: ansible_distribution == 'Amazon'
+
 - name: copy over standard nrpe config
   template: src=nrpe.cfg dest=/etc/nagios/nrpe.cfg owner=root group=root mode=0644
   notify:
