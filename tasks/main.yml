@@ -5,6 +5,7 @@
     - nagios-plugins-standard
     - libnagios-plugin-perl
     - nagios-nrpe-server
+    - perl-Nagios-Plugin
   tags:
     - packages
   when: ansible_distribution == 'Ubuntu'
