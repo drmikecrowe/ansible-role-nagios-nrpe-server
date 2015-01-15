@@ -7,6 +7,18 @@
     - nagios-nrpe-server
   tags:
     - packages
+  when: ansible_distribution == 'Ubuntu'
+
+- name: install nrpe
+  action: yum state=latest pkg={{item}}
+  with_items:
+    - nagios-plugins-all
+    - nrpe
+  when: ansible_distribution == 'Amazon'
+
+- name: create nrpe.d directory for centos
+  file: path=/etc/nagios/nrpe.d/ state=directory
+  when: ansible_distribution == 'Amazon'
 
 - name: copy over non-packaged checks
   copy: src={{ item }} dest={{ nagios_plugins_directory }} owner=root group=root mode=0755
